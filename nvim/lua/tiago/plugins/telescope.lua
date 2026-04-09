@@ -32,7 +32,16 @@ require('telescope').setup({
   },
   pickers = {
     find_files = {
-      hidden = true,
+      find_command = {
+        'fd', '--type', 'f', '--strip-cwd-prefix', '--hidden',
+        '--exclude', '.git',
+        '--exclude', 'node_modules',
+        '--exclude', 'dist',
+        '--exclude', 'build',
+        '--exclude', 'static',
+        '--exclude', 'cache',
+        '--exclude', '.next',
+      },
       debounce = 0,
     },
   },
