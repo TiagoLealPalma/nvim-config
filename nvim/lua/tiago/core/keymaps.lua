@@ -13,7 +13,7 @@
 -- │ FILE NAV     │                                                        │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ <leader>ft   │ Toggle file tree (nvim-tree)                           │
--- │ <leader>ff   │ Find files (Telescope)                                 │
+-- │ <leader><leader>│ Find files (Telescope)                                │
 -- │ <leader>fg   │ Live grep (Telescope)                                  │
 -- │ <leader>fb   │ Switch buffer (Telescope)                              │
 -- │ <leader>fh   │ Search help tags (Telescope)                           │
@@ -70,7 +70,7 @@ map("n", "<leader>ev", ":edit $MYVIMRC<CR>", opts)
 map("n", "<leader>sv", ":source $MYVIMRC<CR>", opts)
 
 map("n", "<leader>ft", ":NvimTreeToggle<CR>", opts)
-map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+map("n", "<leader><leader>", ":Telescope find_files<CR>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 map("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 map("n", "<leader>fh", ":Telescope help_tags<CR>", opts)

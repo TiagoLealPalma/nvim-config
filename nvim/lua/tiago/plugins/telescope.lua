@@ -1,10 +1,13 @@
 -- Fuzzy finder setup for files, grep, buffers, and help.
--- find_files uses fd for speed and .gitignore support, with aggressive static file filtering.
--- live_grep uses rg with default debounce (no 0ms override) to avoid excessive spawning.
+-- Uses fd (respects .gitignore) and rg by default.
 -- Keymaps in core/keymaps.lua: <leader>ff, <leader>fg, <leader>fb, <leader>fh.
 
 require('telescope').setup({
   defaults = {
+    layout_strategy = "horizontal",
+    layout_config = { prompt_position = "top" },
+    sorting_strategy = "ascending",
+    dynamic_preview_title = true,
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -13,36 +16,6 @@ require('telescope').setup({
       '--line-number',
       '--column',
       '--smart-case',
-    },
-    dynamic_preview_title = true,
-    file_ignore_patterns = {
-      "%.git[/\\]",
-      "node_modules[/\\]",
-      "dist[/\\]",
-      "build[/\\]",
-      "static[/\\]",
-      "cache[/\\]",
-      "%.next[/\\]",
-      "%.png$", "%.jpg$", "%.jpeg$", "%.gif$", "%.ico$", "%.svg$", "%.webp$", "%.avif$",
-      "%.woff$", "%.woff2$", "%.ttf$", "%.eot$", "%.otf$",
-      "%.min%.js$", "%.min%.css$", "%.map$",
-      "%.zip$", "%.tar$", "%.gz$", "%.pdf$",
-      "package%-lock%.json$", "yarn%.lock$",
-    },
-  },
-  pickers = {
-    find_files = {
-      find_command = {
-        'fd', '--type', 'f', '--strip-cwd-prefix', '--hidden',
-        '--exclude', '.git',
-        '--exclude', 'node_modules',
-        '--exclude', 'dist',
-        '--exclude', 'build',
-        '--exclude', 'static',
-        '--exclude', 'cache',
-        '--exclude', '.next',
-      },
-      debounce = 0,
     },
   },
 })
