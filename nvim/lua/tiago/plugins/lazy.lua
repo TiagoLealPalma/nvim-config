@@ -37,6 +37,14 @@ require("lazy").setup({
   },
 
   {
+    "ahmedkhalf/project.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("tiago.plugins.project")
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()

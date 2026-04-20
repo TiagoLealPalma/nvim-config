@@ -12,6 +12,7 @@
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ FILE NAV     │                                                        │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ <leader>p    │ Project picker (project.nvim + Telescope)              │
 -- │ <leader>ft   │ Toggle file tree (nvim-tree)                           │
 -- │ <leader><leader>│ Find files (Telescope)                                │
 -- │ <leader>fg   │ Live grep (Telescope)                                  │
@@ -69,6 +70,7 @@ map("n", "<C-s>", ":w<CR>", opts)
 map("n", "<leader>ev", ":edit $MYVIMRC<CR>", opts)
 map("n", "<leader>sv", ":source $MYVIMRC<CR>", opts)
 
+map("n", "<leader>p", ":Telescope projects<CR>", opts)
 map("n", "<leader>ft", ":NvimTreeToggle<CR>", opts)
 map("n", "<leader><leader>", ":Telescope find_files<CR>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
