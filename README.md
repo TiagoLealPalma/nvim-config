@@ -1,23 +1,53 @@
 # nvim-config
 
-Personal Neovim configuration.
+my neovim config. yes, I could've just used VSCode.
 
 ## Dependencies
 
-| Dependency | Purpose | Install (Windows) |
-|---|---|---|
-| [Neovim](https://neovim.io/) (>= 0.9) | Editor | `winget install Neovim.Neovim` |
-| [Git](https://git-scm.com/) | Plugin manager (lazy.nvim) | `winget install Git.Git` |
-| [zig](https://ziglang.org/download/) | C compiler for Treesitter parsers | `winget install zig.zig` |
-| [fd](https://github.com/sharkdp/fd) | Fast file search (Telescope) | `winget install sharkdp.fd` |
-| [ripgrep](https://github.com/BurntSushi/ripgrep) | Live grep (Telescope) | `winget install BurntSushi.ripgrep` |
-| [A Nerd Font](https://www.nerdfonts.com/) | Icons (nvim-tree, lualine) | Download from website |
+| Dependency | Purpose |
+|---|---|
+| [Neovim](https://neovim.io/) >= 0.9 | the whole point |
+| [Git](https://git-scm.com/) | plugin manager (lazy.nvim) |
+| [zig](https://ziglang.org/download/) | C compiler for Treesitter parsers |
+| [fd](https://github.com/sharkdp/fd) | fast file search (Telescope) |
+| [ripgrep](https://github.com/BurntSushi/ripgrep) | live grep (Telescope) |
+| [FiraCode Nerd Font](https://www.nerdfonts.com/) | icons everywhere |
+
+## Install
+
+Run the script for your OS — it installs all dependencies above.
+
+**macOS**
+```sh
+bash install-mac.sh
+```
+
+**Linux**
+```sh
+bash install-linux.sh
+```
+
+**Windows** (PowerShell as Administrator)
+```powershell
+.\install-windows.ps1
+```
 
 ## Setup
 
-1. Install the dependencies above.
-2. Clone this repo and symlink/copy the `nvim` folder to your Neovim config directory:
-   - **Windows:** `%LOCALAPPDATA%\nvim`
-   - **Linux/macOS:** `~/.config/nvim`
-3. Open Neovim — lazy.nvim will auto-install plugins on first launch.
+1. Run the install script for your OS.
+2. Clone this repo and symlink the `nvim` folder to your Neovim config directory:
+
+   **macOS / Linux**
+   ```sh
+   git clone https://github.com/youruser/nvim-config.git
+   ln -s "$PWD/nvim-config/nvim" ~/.config/nvim
+   ```
+
+   **Windows** (PowerShell as Administrator)
+   ```powershell
+   git clone https://github.com/youruser/nvim-config.git
+   New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\nvim" -Target "$(pwd)\nvim-config\nvim"
+   ```
+
+3. Open Neovim — lazy.nvim auto-installs plugins on first launch.
 4. Run `:TSUpdate` to build Treesitter parsers.
