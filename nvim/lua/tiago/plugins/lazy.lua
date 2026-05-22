@@ -93,6 +93,14 @@ require("lazy").setup({
     },
   },
   {
+    "stevearc/conform.nvim",
+    event = "BufWritePre",
+    config = function()
+      require("tiago.plugins.conform")
+    end,
+  },
+
+  {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason-lspconfig.nvim" },
     config = function()

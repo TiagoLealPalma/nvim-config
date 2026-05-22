@@ -39,6 +39,11 @@
 -- │ ]d           │ Next diagnostic                                        │
 -- │ <leader>e    │ Show diagnostic float                                  │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ FORMATTING   │ ↳ defined in plugins/conform.lua                       │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ <leader>f    │ Format buffer (prettier, only if project config found) │
+-- │ (auto)       │ Format on save (same condition)                        │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ GIT          │ ↳ defined in plugins/gitsigns.lua (buffer-local)       │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ ]h           │ Next hunk                                              │
