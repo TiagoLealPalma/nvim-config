@@ -18,8 +18,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
   { "catppuccin/nvim", name = "catppuccin", lazy = true },
-  { "folke/tokyonight.nvim", lazy = false },
+  { "folke/tokyonight.nvim", lazy = true },
   { "EdenEast/nightfox.nvim", lazy = true },
+  { "AlexvZyl/nordic.nvim", lazy = false },
 
   {
     "nvim-tree/nvim-tree.lua",

@@ -1,10 +1,10 @@
 -- Statusline showing mode, git branch, diff, diagnostics, filename, and cursor position.
--- Uses tokyonight theme to match the colorscheme set in ui/theme.lua.
+-- Uses nordic theme to match the colorscheme set in ui/theme.lua.
 -- globalstatus = true means one statusline for the whole editor, not per-split.
 
 require("lualine").setup({
   options = {
-    theme = "tokyonight",
+    theme = "nordic",
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     globalstatus = true,
