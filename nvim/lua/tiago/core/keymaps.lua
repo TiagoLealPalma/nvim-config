@@ -16,7 +16,7 @@
 -- │ <leader>ft   │ Toggle file tree (nvim-tree)                           │
 -- │ <leader><leader>│ Find files (Telescope)                                │
 -- │ <leader>fg   │ Live grep (Telescope)                                  │
--- │ <leader>fb   │ Switch buffer (Telescope)                              │
+-- │ <leader>fb   │ Switch buffer — jumps to existing tab (Telescope)      │
 -- │ <leader>fh   │ Search help tags (Telescope)                           │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ TERMINAL     │ ↳ defined in core/terminal.lua                         │
@@ -59,6 +59,13 @@
 -- │ <CR>         │ Confirm selected completion                            │
 -- │ <Tab>        │ Select next completion item                            │
 -- │ <S-Tab>      │ Select previous completion item                        │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ BUFFERLINE   │ ↳ defined in plugins/bufferline.lua                    │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ <S-h>        │ Previous buffer                                        │
+-- │ <S-l>        │ Next buffer                                            │
+-- │ <leader>1..9 │ Jump to buffer by index                               │
+-- │ <leader>x    │ Close current buffer (keeps window layout)             │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ GUI FONT     │ ↳ defined in ui/font.lua (GUI clients only)            │
 -- ├──────────────┼────────────────────────────────────────────────────────┤

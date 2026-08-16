@@ -62,6 +62,14 @@ require("lazy").setup({
   },
 
   {
+    "akinsho/bufferline.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("tiago.plugins.bufferline")
+    end,
+  },
+
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
