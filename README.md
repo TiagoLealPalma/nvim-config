@@ -52,7 +52,7 @@ Only the nvim config is linked natively on Windows — tmux doesn't run outside 
 | Plugin | Purpose |
 |---|---|
 | [lazy.nvim](https://github.com/folke/lazy.nvim) | plugin manager |
-| [nordic.nvim](https://github.com/AlexvZyl/nordic.nvim) | colorscheme (catppuccin / tokyonight / nightfox also available) |
+| `colors/ristretto.lua` (custom) | colorscheme matching the Omarchy Ristretto terminal theme (nordic.nvim / catppuccin / tokyonight / nightfox also available) |
 | [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) | file explorer |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | fuzzy finder |
 | [project.nvim](https://github.com/ahmedkhalf/project.nvim) | project switcher |
@@ -152,4 +152,6 @@ Prefix is `Ctrl+t` (not the tmux default `Ctrl+b`).
 
 ### Theme
 
-Status bar uses hardcoded Nord hex colors directly in `tmux/tmux.conf` (matches `nordic.nvim`) — not the `nord-tmux` plugin, which only uses generic ANSI color names and relies on the terminal's own palette already being Nord (ours isn't, so it looked wrong/vivid). [tpm](https://github.com/tmux-plugins/tpm) is still installed automatically by the install scripts for future plugins — add `@plugin` lines at the bottom of `tmux/tmux.conf` then `Ctrl+t I` inside tmux to install them.
+Both nvim (`nvim/colors/ristretto.lua`, a custom colorscheme) and the tmux status bar (`tmux/tmux.conf`, hardcoded hex) match the Omarchy **Ristretto** terminal theme — colors pulled directly from `~/.local/share/omarchy/themes/ristretto/alacritty.toml` so the whole stack (terminal, tmux, nvim) looks like one consistent theme instead of three different ones fighting each other. Hardcoded hex rather than a plugin because plugins like `nord-tmux` only use generic ANSI color names and assume the terminal's own palette matches — unreliable across machines/terminals.
+
+To switch nvim back to a bundled theme instead, edit `nvim/lua/tiago/ui/theme.lua` (`nordic`, `catppuccin`, `tokyonight`, `nightfox` are all installed). [tpm](https://github.com/tmux-plugins/tpm) is still installed automatically by the install scripts for future tmux plugins — add `@plugin` lines at the bottom of `tmux/tmux.conf` then `Ctrl+t I` inside tmux to install them.
