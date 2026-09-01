@@ -1,4 +1,4 @@
--- Buffer tab bar with padded-slant separators.
+-- Buffer tab bar with thin separators.
 -- Keymaps: <S-h>/<S-l> cycle, <leader>1-9 jump by index, <leader>x close.
 -- <leader>fb (Telescope buffers) is patched in plugins/telescope.lua to jump
 -- to an existing bufferline tab instead of opening a duplicate.
@@ -6,7 +6,7 @@
 require("bufferline").setup({
   options = {
     mode = "buffers",
-    separator_style = "padded_slant",
+    separator_style = "thin",
     show_buffer_close_icons = false,
     show_close_icon = false,
     always_show_bufferline = true,
