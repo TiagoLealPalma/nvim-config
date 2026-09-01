@@ -5,11 +5,14 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 install_font() {
   local font_dir="$HOME/.local/share/fonts"
+  local tmp_zip="/tmp/FiraCodeNerdFont-$$.zip"
   mkdir -p "$font_dir"
   echo "Downloading FiraCode Nerd Font..."
-  curl -fLo "$font_dir/FiraCodeNerdFont-Regular.ttf" \
-    "https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/FiraCode/Regular/FiraCodeNerdFont-Regular.ttf"
-  fc-cache -fv
+  curl -fLo "$tmp_zip" \
+    "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
+  unzip -oq "$tmp_zip" -d "$font_dir"
+  rm -f "$tmp_zip"
+  fc-cache -f "$font_dir"
   echo "Font installed."
 }
 
@@ -28,12 +31,12 @@ link_configs() {
 # Check /etc/pacman.conf, not just `command -v pacman` — Debian/Ubuntu ship an
 # unrelated game package also called "pacman", which would otherwise misdetect.
 if [ -f /etc/pacman.conf ]; then
-  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux
+  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux unzip
   install_font
 
 elif command -v apt >/dev/null 2>&1; then
   sudo apt update
-  sudo apt install -y neovim git fd-find ripgrep snapd tmux
+  sudo apt install -y neovim git fd-find ripgrep snapd tmux unzip
   # fd is installed as fdfind on Debian/Ubuntu — make an alias
   if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
     mkdir -p "$HOME/.local/bin"
@@ -45,7 +48,7 @@ elif command -v apt >/dev/null 2>&1; then
   install_font
 
 elif command -v dnf >/dev/null 2>&1; then
-  sudo dnf install -y neovim git zig fd-find ripgrep tmux
+  sudo dnf install -y neovim git zig fd-find ripgrep tmux unzip
   install_font
 
 else
