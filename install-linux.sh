@@ -25,15 +25,17 @@ link_configs() {
   echo "Linked dev launcher -> ~/.local/bin/dev (make sure ~/.local/bin is in your PATH)"
 }
 
-if command -v pacman &>/dev/null; then
+# Check /etc/pacman.conf, not just `command -v pacman` — Debian/Ubuntu ship an
+# unrelated game package also called "pacman", which would otherwise misdetect.
+if [ -f /etc/pacman.conf ]; then
   sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux
   install_font
 
-elif command -v apt &>/dev/null; then
+elif command -v apt >/dev/null 2>&1; then
   sudo apt update
   sudo apt install -y neovim git fd-find ripgrep snapd tmux
   # fd is installed as fdfind on Debian/Ubuntu — make an alias
-  if ! command -v fd &>/dev/null && command -v fdfind &>/dev/null; then
+  if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
     mkdir -p "$HOME/.local/bin"
     ln -sf "$(which fdfind)" "$HOME/.local/bin/fd"
     echo "Linked fdfind -> ~/.local/bin/fd (make sure ~/.local/bin is in your PATH)"
@@ -42,7 +44,7 @@ elif command -v apt &>/dev/null; then
   sudo snap install zig --classic --beta
   install_font
 
-elif command -v dnf &>/dev/null; then
+elif command -v dnf >/dev/null 2>&1; then
   sudo dnf install -y neovim git zig fd-find ripgrep tmux
   install_font
 
