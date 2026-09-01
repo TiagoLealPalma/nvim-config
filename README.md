@@ -155,3 +155,9 @@ Prefix is `Ctrl+t` (not the tmux default `Ctrl+b`).
 Both nvim (`nvim/colors/ristretto.lua`, a custom colorscheme) and the tmux status bar (`tmux/tmux.conf`, hardcoded hex) match the Omarchy **Ristretto** terminal theme — colors pulled directly from `~/.local/share/omarchy/themes/ristretto/alacritty.toml` so the whole stack (terminal, tmux, nvim) looks like one consistent theme instead of three different ones fighting each other. Hardcoded hex rather than a plugin because plugins like `nord-tmux` only use generic ANSI color names and assume the terminal's own palette matches — unreliable across machines/terminals.
 
 To switch nvim back to a bundled theme instead, edit `nvim/lua/tiago/ui/theme.lua` (`nordic`, `catppuccin`, `tokyonight`, `nightfox` are all installed). [tpm](https://github.com/tmux-plugins/tpm) is still installed automatically by the install scripts for future tmux plugins — add `@plugin` lines at the bottom of `tmux/tmux.conf` then `Ctrl+t I` inside tmux to install them.
+
+**Windows Terminal (for WSL)**: nvim/tmux colors work as-is (real hex, no terminal theme dependency), but the terminal chrome itself (plain shell background, e.g. outside tmux/nvim) doesn't inherit Omarchy's system theme on Windows. `windows-terminal/ristretto.json` has the same palette as a Windows Terminal color scheme:
+
+1. Open Windows Terminal → Settings → open `settings.json` (bottom-left gear icon dropdown, or `Ctrl+,` then the "Open JSON file" button)
+2. Paste the contents of `windows-terminal/ristretto.json` into the `"schemes"` array
+3. On your WSL profile, set `"colorScheme": "Ristretto"`
