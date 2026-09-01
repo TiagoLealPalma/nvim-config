@@ -23,6 +23,14 @@ require("lazy").setup({
   { "AlexvZyl/nordic.nvim", lazy = false },
 
   {
+    "mrjones2014/smart-splits.nvim",
+    lazy = false,
+    config = function()
+      require("tiago.plugins.smart-splits")
+    end,
+  },
+
+  {
     "nvim-tree/nvim-tree.lua",
     config = function()
       require("tiago.plugins.nvim-tree")

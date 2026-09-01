@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 install_font() {
   local font_dir="$HOME/.local/share/fonts"
   mkdir -p "$font_dir"
@@ -11,13 +13,25 @@ install_font() {
   echo "Font installed."
 }
 
+link_configs() {
+  mkdir -p "$HOME/.config" "$HOME/.config/tmux" "$HOME/.local/bin"
+
+  ln -sfn "$script_dir/nvim" "$HOME/.config/nvim"
+  ln -sf "$script_dir/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+  ln -sf "$script_dir/bin/dev" "$HOME/.local/bin/dev"
+
+  echo "Linked nvim config -> ~/.config/nvim"
+  echo "Linked tmux config -> ~/.config/tmux/tmux.conf"
+  echo "Linked dev launcher -> ~/.local/bin/dev (make sure ~/.local/bin is in your PATH)"
+}
+
 if command -v pacman &>/dev/null; then
-  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep
+  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux
   install_font
 
 elif command -v apt &>/dev/null; then
   sudo apt update
-  sudo apt install -y neovim git fd-find ripgrep snapd
+  sudo apt install -y neovim git fd-find ripgrep snapd tmux
   # fd is installed as fdfind on Debian/Ubuntu — make an alias
   if ! command -v fd &>/dev/null && command -v fdfind &>/dev/null; then
     mkdir -p "$HOME/.local/bin"
@@ -29,12 +43,14 @@ elif command -v apt &>/dev/null; then
   install_font
 
 elif command -v dnf &>/dev/null; then
-  sudo dnf install -y neovim git zig fd-find ripgrep
+  sudo dnf install -y neovim git zig fd-find ripgrep tmux
   install_font
 
 else
-  echo "Unsupported package manager. Install neovim, git, zig, fd, and ripgrep manually."
+  echo "Unsupported package manager. Install neovim, git, zig, fd, ripgrep, and tmux manually."
   exit 1
 fi
+
+link_configs
 
 echo "Done."

@@ -12,10 +12,16 @@ my neovim config. yes, I could've just used VSCode.
 | [fd](https://github.com/sharkdp/fd) | fast file search (Telescope) |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | live grep (Telescope) |
 | [FiraCode Nerd Font](https://www.nerdfonts.com/) | icons everywhere |
+| [tmux](https://github.com/tmux/tmux) | terminal multiplexer (Linux/macOS; needs WSL on Windows) |
 
 ## Install
 
-Run the script for your OS — it installs all dependencies above.
+Clone the repo, then run the script for your OS — it installs all dependencies above and symlinks the configs into place (`~/.config/nvim`, `~/.config/tmux/tmux.conf`, `~/.local/bin/dev`).
+
+```sh
+git clone https://github.com/youruser/nvim-config.git
+cd nvim-config
+```
 
 **macOS**
 ```sh
@@ -31,26 +37,14 @@ bash install-linux.sh
 ```powershell
 .\install-windows.ps1
 ```
+Only the nvim config is linked natively on Windows — tmux doesn't run outside WSL, so run `install-linux.sh` inside WSL too if you want the tmux/`dev` setup there.
 
 ## Setup
 
-1. Run the install script for your OS.
-2. Clone this repo and symlink the `nvim` folder to your Neovim config directory:
-
-   **macOS / Linux**
-   ```sh
-   git clone https://github.com/youruser/nvim-config.git
-   ln -s "$PWD/nvim-config/nvim" ~/.config/nvim
-   ```
-
-   **Windows** (PowerShell as Administrator)
-   ```powershell
-   git clone https://github.com/youruser/nvim-config.git
-   New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\nvim" -Target "$(pwd)\nvim-config\nvim"
-   ```
-
-3. Open Neovim — lazy.nvim auto-installs plugins on first launch.
-4. Run `:TSUpdate` to build Treesitter parsers.
+1. Run the install script for your OS (above).
+2. Open Neovim — lazy.nvim auto-installs plugins on first launch.
+3. Run `:TSUpdate` to build Treesitter parsers.
+4. Run `dev` from any project directory to launch the tmux layout (`nvim` / `claude` / `shell` windows).
 
 ## Plugins
 
@@ -93,6 +87,7 @@ Leader key is `Space`.
 | `<leader>fh` | Search help tags |
 | `<leader>p` | Project picker |
 | `<leader>ft` | Toggle file tree |
+| `Ctrl+h/j/k/l` | Move to split in that direction (also crosses into tmux panes) |
 
 ### Buffers
 
@@ -133,5 +128,20 @@ Leader key is `Space`.
 | Key | Action |
 |---|---|
 | `<leader>f` | Format buffer (prettier) |
-| `<leader>t` | Floating terminal (cwd = file dir) |
 | `<leader>+` / `<leader>-` | Increase / decrease font size (GUI only) |
+
+## Tmux
+
+Run `dev` from a project directory to open a tmux session with three windows: `nvim`, `claude`, `shell`.
+
+Prefix is `Ctrl+t` (not the tmux default `Ctrl+b`).
+
+| Key | Action |
+|---|---|
+| `Ctrl+t s` / `\|` | Split pane side-by-side |
+| `Ctrl+t -` | Split pane top/bottom |
+| `Ctrl+t n` | New window |
+| `Ctrl+t q` | Kill current window |
+| `Ctrl+t x` | Kill current pane (confirms) |
+| `Ctrl+h/j/k/l` | Move between panes (crosses into nvim splits) |
+| `Alt+1`–`9` | Jump to window N, creating it if it doesn't exist |

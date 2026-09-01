@@ -19,11 +19,9 @@
 -- │ <leader>fb   │ Switch buffer — jumps to existing tab (Telescope)      │
 -- │ <leader>fh   │ Search help tags (Telescope)                           │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
--- │ TERMINAL     │ ↳ defined in core/terminal.lua                         │
+-- │ SPLIT NAV    │ ↳ smart-splits.nvim, works across nvim & tmux panes    │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
--- │ <leader>t    │ Open floating terminal in current file's directory     │
--- │ q            │ Close floating terminal (terminal mode, buffer-local)  │
--- │ <Esc>        │ Close floating terminal (terminal mode, buffer-local)  │
+-- │ <C-h/j/k/l>  │ Move to split/pane in that direction                   │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ LSP          │ ↳ defined in plugins/lsp.lua (buffer-local, LspAttach) │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
@@ -89,7 +87,8 @@ map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 map("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 map("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 
-local terminal = require("tiago.core.terminal")
-vim.keymap.set("n", "<leader>t", terminal.open_floating_terminal, {
-	desc = "Floating terminal (cwd = file dir)",
-})
+local smart_splits = require("smart-splits")
+map("n", "<C-h>", smart_splits.move_cursor_left, opts)
+map("n", "<C-j>", smart_splits.move_cursor_down, opts)
+map("n", "<C-k>", smart_splits.move_cursor_up, opts)
+map("n", "<C-l>", smart_splits.move_cursor_right, opts)
