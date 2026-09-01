@@ -28,15 +28,24 @@ link_configs() {
   echo "Linked dev launcher -> ~/.local/bin/dev (make sure ~/.local/bin is in your PATH)"
 }
 
+install_tmux_plugins() {
+  local tpm_dir="$HOME/.tmux/plugins/tpm"
+  if [ ! -d "$tpm_dir" ]; then
+    git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+  fi
+  "$tpm_dir/scripts/install_plugins.sh" || \
+    echo "tpm plugin install failed — run 'Ctrl-t I' inside tmux to retry manually."
+}
+
 # Check /etc/pacman.conf, not just `command -v pacman` — Debian/Ubuntu ship an
 # unrelated game package also called "pacman", which would otherwise misdetect.
 if [ -f /etc/pacman.conf ]; then
-  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux unzip
+  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux unzip fzf
   install_font
 
 elif command -v apt >/dev/null 2>&1; then
   sudo apt update
-  sudo apt install -y neovim git fd-find ripgrep snapd tmux unzip
+  sudo apt install -y neovim git fd-find ripgrep snapd tmux unzip fzf
   # fd is installed as fdfind on Debian/Ubuntu — make an alias
   if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
     mkdir -p "$HOME/.local/bin"
@@ -48,7 +57,7 @@ elif command -v apt >/dev/null 2>&1; then
   install_font
 
 elif command -v dnf >/dev/null 2>&1; then
-  sudo dnf install -y neovim git zig fd-find ripgrep tmux unzip
+  sudo dnf install -y neovim git zig fd-find ripgrep tmux unzip fzf
   install_font
 
 else
@@ -57,5 +66,6 @@ else
 fi
 
 link_configs
+install_tmux_plugins
 
 echo "Done."

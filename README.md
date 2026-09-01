@@ -13,6 +13,7 @@ my neovim config. yes, I could've just used VSCode.
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | live grep (Telescope) |
 | [FiraCode Nerd Font](https://www.nerdfonts.com/) | icons everywhere |
 | [tmux](https://github.com/tmux/tmux) | terminal multiplexer (Linux/macOS; needs WSL on Windows) |
+| [fzf](https://github.com/junegunn/fzf) | fuzzy project picker for the `dev` launcher |
 
 ## Install
 
@@ -132,7 +133,9 @@ Leader key is `Space`.
 
 ## Tmux
 
-Run `dev` from a project directory to open a tmux session with three windows: `nvim`, `claude`, `shell`.
+Run `dev` to open a tmux session with three windows: `nvim`, `claude`, `shell`.
+- `dev` — if cwd is already a git repo, uses it; otherwise fuzzy-picks one from `~/Git` (override with `DEV_PROJECTS_ROOT`)
+- `dev <path>` — use that directory directly
 
 Prefix is `Ctrl+t` (not the tmux default `Ctrl+b`).
 
