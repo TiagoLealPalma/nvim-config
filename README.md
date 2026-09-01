@@ -45,7 +45,7 @@ Only the nvim config is linked natively on Windows — tmux doesn't run outside 
 1. Run the install script for your OS (above).
 2. Open Neovim — lazy.nvim auto-installs plugins on first launch.
 3. Run `:TSUpdate` to build Treesitter parsers.
-4. Run `dev` from any project directory to launch the tmux layout (`nvim` / `claude` / `shell` windows).
+4. Run `dev` to launch the tmux layout (`nvim` / `claude` / `shell` windows) — see [Tmux](#tmux) below.
 
 ## Plugins
 
@@ -146,5 +146,10 @@ Prefix is `Ctrl+t` (not the tmux default `Ctrl+b`).
 | `Ctrl+t n` | New window |
 | `Ctrl+t q` | Kill current window |
 | `Ctrl+t x` | Kill current pane (confirms) |
+| `Ctrl+t k` | Kill the whole tmux server, every session (confirms) |
 | `Ctrl+h/j/k/l` | Move between panes (crosses into nvim splits) |
 | `Alt+1`–`9` | Jump to window N, creating it if it doesn't exist |
+
+### Theme
+
+Status bar theme is [nord-tmux](https://github.com/nordtheme/tmux) (matches `nordic.nvim`), managed by [tpm](https://github.com/tmux-plugins/tpm) — both are cloned and installed automatically by the install scripts, no manual setup needed. To add/change plugins later, edit the `@plugin` lines at the bottom of `tmux/tmux.conf` then `Ctrl+t I` inside tmux to install them.
