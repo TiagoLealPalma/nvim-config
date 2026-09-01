@@ -152,4 +152,4 @@ Prefix is `Ctrl+t` (not the tmux default `Ctrl+b`).
 
 ### Theme
 
-Status bar theme is [nord-tmux](https://github.com/nordtheme/tmux) (matches `nordic.nvim`), managed by [tpm](https://github.com/tmux-plugins/tpm) — both are cloned and installed automatically by the install scripts, no manual setup needed. To add/change plugins later, edit the `@plugin` lines at the bottom of `tmux/tmux.conf` then `Ctrl+t I` inside tmux to install them.
+Status bar uses hardcoded Nord hex colors directly in `tmux/tmux.conf` (matches `nordic.nvim`) — not the `nord-tmux` plugin, which only uses generic ANSI color names and relies on the terminal's own palette already being Nord (ours isn't, so it looked wrong/vivid). [tpm](https://github.com/tmux-plugins/tpm) is still installed automatically by the install scripts for future plugins — add `@plugin` lines at the bottom of `tmux/tmux.conf` then `Ctrl+t I` inside tmux to install them.
