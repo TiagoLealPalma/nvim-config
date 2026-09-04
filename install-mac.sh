@@ -28,4 +28,14 @@ fi
 "$tpm_dir/scripts/install_plugins.sh" || \
   echo "tpm plugin install failed — run 'Ctrl-t I' inside tmux to retry manually."
 
+marker="# nvim-config: dev-setup handoff wrapper"
+if ! grep -qF "$marker" "$HOME/.bashrc" 2>/dev/null; then
+  {
+    echo ""
+    echo "$marker"
+    echo "source \"$script_dir/shell/nvim-wrapper.sh\""
+  } >> "$HOME/.bashrc"
+  echo "Added nvim wrapper source line to ~/.bashrc"
+fi
+
 echo "Done. Open a new terminal to use the updated font."

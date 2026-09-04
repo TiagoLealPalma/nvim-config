@@ -56,7 +56,7 @@ if tmux has-session -t "$session" 2>/dev/null; then
 fi
 
 tmux new-session -d -s "$session" -n nvim -c "$dir"
-tmux send-keys -t "$session:nvim" "nvim" C-m
+tmux send-keys -t "$session:nvim" "nvim -c 'Telescope find_files'" C-m
 
 tmux new-window -t "$session" -n claude -c "$dir"
 tmux send-keys -t "$session:claude" "claude" C-m

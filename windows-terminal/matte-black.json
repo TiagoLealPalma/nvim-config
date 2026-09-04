@@ -1,0 +1,23 @@
+{
+    "name": "Matte Black",
+    "black": "#333333",
+    "red": "#D35F5F",
+    "green": "#D9B361",
+    "yellow": "#b91c1c",
+    "blue": "#e68e0d",
+    "purple": "#D35F5F",
+    "cyan": "#bebebe",
+    "white": "#bebebe",
+    "brightBlack": "#8a8a8d",
+    "brightRed": "#B91C1C",
+    "brightGreen": "#D9B361",
+    "brightYellow": "#b90a0a",
+    "brightBlue": "#f59e0b",
+    "brightPurple": "#B91C1C",
+    "brightCyan": "#eaeaea",
+    "brightWhite": "#ffffff",
+    "background": "#121212",
+    "foreground": "#bebebe",
+    "cursorColor": "#eaeaea",
+    "selectionBackground": "#333333"
+}

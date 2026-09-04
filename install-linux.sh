@@ -28,6 +28,18 @@ link_configs() {
   echo "Linked dev launcher -> ~/.local/bin/dev (make sure ~/.local/bin is in your PATH)"
 }
 
+install_shell_wrapper() {
+  local marker="# nvim-config: dev-setup handoff wrapper"
+  if ! grep -qF "$marker" "$HOME/.bashrc" 2>/dev/null; then
+    {
+      echo ""
+      echo "$marker"
+      echo "source \"$script_dir/shell/nvim-wrapper.sh\""
+    } >> "$HOME/.bashrc"
+    echo "Added nvim wrapper source line to ~/.bashrc"
+  fi
+}
+
 install_lazygit_binary() {
   if command -v lazygit >/dev/null 2>&1; then
     return
@@ -84,5 +96,6 @@ fi
 
 link_configs
 install_tmux_plugins
+install_shell_wrapper
 
 echo "Done."
