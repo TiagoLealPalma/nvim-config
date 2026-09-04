@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Opens (or attaches to) a tmux session with a fixed 3-window layout:
-#   1: nvim   2: claude   3: shell
+# Opens (or attaches to) a tmux session with a fixed 4-window layout:
+#   1: nvim   2: claude   3: shell   4: lazygit
 # Usage: dev [directory]
 #   - directory given: use it directly
 #   - no directory, cwd is already a git repo: use cwd
@@ -44,6 +44,9 @@ tmux new-window -t "$session" -n claude -c "$dir"
 tmux send-keys -t "$session:claude" "claude" C-m
 
 tmux new-window -t "$session" -n shell -c "$dir"
+
+tmux new-window -t "$session" -n lazygit -c "$dir"
+tmux send-keys -t "$session:lazygit" "lazygit" C-m
 
 tmux select-window -t "$session:nvim"
 exec tmux attach -t "$session"

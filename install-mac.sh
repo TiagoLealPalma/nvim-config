@@ -8,7 +8,7 @@ if ! command -v brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-brew install neovim git zig fd ripgrep tmux fzf
+brew install neovim git zig fd ripgrep tmux fzf lazygit
 brew install --cask font-fira-code-nerd-font
 
 mkdir -p "$HOME/.config" "$HOME/.config/tmux" "$HOME/.local/bin"

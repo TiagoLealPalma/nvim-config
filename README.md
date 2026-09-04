@@ -14,6 +14,7 @@ my neovim config. yes, I could've just used VSCode.
 | [FiraCode Nerd Font](https://www.nerdfonts.com/) | icons everywhere |
 | [tmux](https://github.com/tmux/tmux) | terminal multiplexer (Linux/macOS; needs WSL on Windows) |
 | [fzf](https://github.com/junegunn/fzf) | fuzzy project picker for the `dev` launcher |
+| [lazygit](https://github.com/jesseduffield/lazygit) | git TUI, one of the four `dev` windows |
 
 ## Install
 
@@ -64,6 +65,7 @@ Only the nvim config is linked natively on Windows — tmux doesn't run outside 
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | formatting (prettier, project-local) |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | git decorations |
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs) | bracket auto-close |
+| [Comment.nvim](https://github.com/numToStr/Comment.nvim) | toggle comments (`gcc`, `gc` + motion) |
 
 ## Keymaps
 
@@ -130,10 +132,13 @@ Leader key is `Space`.
 |---|---|
 | `<leader>f` | Format buffer (prettier) |
 | `<leader>+` / `<leader>-` | Increase / decrease font size (GUI only) |
+| `gcc` | Toggle comment on current line |
+| `gc` + motion | Toggle comment over a motion (e.g. `gcap` for paragraph) |
+| `gc` (visual) | Toggle comment on selection |
 
 ## Tmux
 
-Run `dev` to open a tmux session with three windows: `nvim`, `claude`, `shell`.
+Run `dev` to open a tmux session with four windows: `nvim`, `claude`, `shell`, `lazygit`.
 - `dev` — if cwd is already a git repo, uses it; otherwise fuzzy-picks one from `~/Git` (override with `DEV_PROJECTS_ROOT`)
 - `dev <path>` — use that directory directly
 

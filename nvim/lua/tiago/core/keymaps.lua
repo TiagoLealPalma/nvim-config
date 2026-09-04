@@ -51,6 +51,12 @@
 -- │ <leader>hr   │ Reset hunk                                             │
 -- │ <leader>hb   │ Blame line                                             │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ COMMENTING   │ ↳ defined in plugins/comment.lua (Comment.nvim)        │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ gcc          │ Toggle comment on current line                         │
+-- │ gc + motion  │ Toggle comment over a motion (e.g. gcap for paragraph) │
+-- │ gc (visual)  │ Toggle comment on selection                            │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ COMPLETION   │ ↳ defined in core/completion.lua (insert mode)         │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ <C-Space>    │ Trigger completion menu                                │

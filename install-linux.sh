@@ -28,6 +28,21 @@ link_configs() {
   echo "Linked dev launcher -> ~/.local/bin/dev (make sure ~/.local/bin is in your PATH)"
 }
 
+install_lazygit_binary() {
+  if command -v lazygit >/dev/null 2>&1; then
+    return
+  fi
+  local version
+  version="$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -oP '"tag_name": *"v\K[^"]*')"
+  local tmp_tar="/tmp/lazygit-$$.tar.gz"
+  echo "Installing lazygit..."
+  curl -fLo "$tmp_tar" \
+    "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${version}_linux_x86_64.tar.gz"
+  tar xf "$tmp_tar" -C /tmp lazygit
+  sudo install /tmp/lazygit -D -t /usr/local/bin/
+  rm -f "$tmp_tar" /tmp/lazygit
+}
+
 install_tmux_plugins() {
   local tpm_dir="$HOME/.tmux/plugins/tpm"
   if [ ! -d "$tpm_dir" ]; then
@@ -40,7 +55,7 @@ install_tmux_plugins() {
 # Check /etc/pacman.conf, not just `command -v pacman` — Debian/Ubuntu ship an
 # unrelated game package also called "pacman", which would otherwise misdetect.
 if [ -f /etc/pacman.conf ]; then
-  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux unzip fzf
+  sudo pacman -Sy --noconfirm neovim git zig fd ripgrep tmux unzip fzf lazygit
   install_font
 
 elif command -v apt >/dev/null 2>&1; then
@@ -55,10 +70,12 @@ elif command -v apt >/dev/null 2>&1; then
   # zig is not in apt; install via snap
   sudo snap install zig --classic --beta
   install_font
+  install_lazygit_binary
 
 elif command -v dnf >/dev/null 2>&1; then
   sudo dnf install -y neovim git zig fd-find ripgrep tmux unzip fzf
   install_font
+  install_lazygit_binary
 
 else
   echo "Unsupported package manager. Install neovim, git, zig, fd, ripgrep, and tmux manually."

@@ -78,6 +78,14 @@ require("lazy").setup({
   },
 
   {
+    "numToStr/Comment.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("tiago.plugins.comment")
+    end,
+  },
+
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
