@@ -23,6 +23,9 @@ local c = {
   crimson_bright = "#b90a0a",
   orange = "#e68e0d", -- theme calls this "blue"
   orange_bright = "#f59e0b",
+  bracket = "#f2e2c9", -- near-white with a faint orange tint, for unmatched brackets/braces/parens
+  green = "#8fd9a0", -- bright, low-saturation green for diff/gitsigns additions
+  diff_red = "#e29a9a", -- bright, low-saturation red for diff/gitsigns deletions
   magenta = "#D35F5F",
   magenta_bright = "#B91C1C",
   cyan = "#bebebe", -- theme calls this "cyan", same as fg
@@ -48,7 +51,7 @@ hl("SignColumn", { bg = c.bg })
 hl("Visual", { bg = c.bg_alt })
 hl("Search", { fg = c.bg, bg = c.gold })
 hl("IncSearch", { fg = c.bg, bg = c.orange })
-hl("MatchParen", { fg = c.orange, bold = true })
+hl("MatchParen", { fg = c.orange_bright, bold = true })
 hl("Folded", { fg = c.black_bright, bg = c.bg_alt })
 hl("WinSeparator", { fg = c.black_bright })
 hl("VertSplit", { fg = c.black_bright })
@@ -67,10 +70,10 @@ hl("Whitespace", { fg = c.black_bright })
 hl("ColorColumn", { bg = c.bg_alt })
 
 -- Diffs / git
-hl("DiffAdd", { fg = c.gold, bg = c.bg_alt })
-hl("DiffChange", { fg = c.gold, bg = c.bg_alt })
-hl("DiffDelete", { fg = c.red, bg = c.bg_alt })
-hl("DiffText", { fg = c.orange, bg = c.bg_alt })
+hl("DiffAdd", { fg = c.green, bg = c.bg_alt })
+hl("DiffChange", { fg = c.green, bg = c.bg_alt })
+hl("DiffDelete", { fg = c.diff_red, bg = c.bg_alt })
+hl("DiffText", { fg = c.diff_red, bg = c.bg_alt, bold = true })
 
 -- Syntax
 hl("Comment", { fg = c.black_bright, italic = true })
@@ -93,7 +96,7 @@ hl("Constant", { fg = c.magenta })
 hl("PreProc", { fg = c.orange })
 hl("Include", { fg = c.orange })
 hl("Special", { fg = c.orange })
-hl("Delimiter", { fg = c.fg })
+hl("Delimiter", { fg = c.bracket })
 hl("Error", { fg = c.crimson_bright, bold = true })
 hl("Todo", { fg = c.bg, bg = c.gold, bold = true })
 
@@ -109,7 +112,7 @@ hl("@comment", { link = "Comment" })
 hl("@type", { link = "Type" })
 hl("@constant", { link = "Constant" })
 hl("@constant.builtin", { fg = c.magenta })
-hl("@punctuation.bracket", { fg = c.fg })
+hl("@punctuation.bracket", { fg = c.bracket })
 hl("@punctuation.delimiter", { fg = c.fg })
 hl("@tag", { fg = c.red })
 hl("@tag.attribute", { fg = c.gold })
@@ -126,9 +129,9 @@ hl("DiagnosticUnderlineInfo", { undercurl = true, sp = c.cyan_bright })
 hl("DiagnosticUnderlineHint", { undercurl = true, sp = c.magenta })
 
 -- gitsigns
-hl("GitSignsAdd", { fg = c.gold })
-hl("GitSignsChange", { fg = c.gold })
-hl("GitSignsDelete", { fg = c.red })
+hl("GitSignsAdd", { fg = c.green })
+hl("GitSignsChange", { fg = c.green })
+hl("GitSignsDelete", { fg = c.diff_red })
 
 -- bufferline / nvim-tree fall back to the core groups above (Directory,
 -- TabLine, etc.) reasonably well without needing explicit overrides.
