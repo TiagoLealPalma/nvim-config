@@ -65,6 +65,8 @@ Only the nvim config is linked natively on Windows — tmux doesn't run outside 
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | formatting (prettier, project-local) |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | git decorations |
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs) | bracket auto-close |
+| [alpha-nvim](https://github.com/goolord/alpha-nvim) | startup dashboard |
+| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | indent guides |
 | [Comment.nvim](https://github.com/numToStr/Comment.nvim) | toggle comments (`gcc`, `gc` + motion) |
 
 ## Keymaps
@@ -136,11 +138,23 @@ Leader key is `Space`.
 | `gc` + motion | Toggle comment over a motion (e.g. `gcap` for paragraph) |
 | `gc` (visual) | Toggle comment on selection |
 
+## Dashboard
+
+Opening bare `nvim` (no file args) shows a startup dashboard (alpha-nvim) instead of a blank buffer:
+
+| Key | Action |
+|---|---|
+| `p` | Open Project — nvim-only, cd's into the picked project (project.nvim) |
+| `d` | Dev Setup — switches your tmux client to that project's own `dev` session (creating it via `dev --no-attach` if needed). Only works when already inside tmux |
+| `f` | Find File |
+| `q` | Quit |
+
 ## Tmux
 
-Run `dev` to open a tmux session with four windows: `nvim`, `claude`, `shell`, `lazygit`.
+Run `dev` to open a **per-project** tmux session (named after the project's folder) with four windows: `nvim`, `claude`, `shell`, `lazygit`. Each project gets its own independent session — running `dev` in two different projects creates two separate sessions, not one shared session.
 - `dev` — if cwd is already a git repo, uses it; otherwise fuzzy-picks one from `~/Git` (override with `DEV_PROJECTS_ROOT`)
 - `dev <path>` — use that directory directly
+- `dev --no-attach <path>` — create/ensure the session exists without attaching (used by nvim's "Dev Setup" dashboard button, see below)
 
 Prefix is `Ctrl+t` (not the tmux default `Ctrl+b`).
 

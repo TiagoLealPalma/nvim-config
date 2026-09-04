@@ -19,6 +19,13 @@
 -- │ <leader>fb   │ Switch buffer — jumps to existing tab (Telescope)      │
 -- │ <leader>fh   │ Search help tags (Telescope)                           │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ DASHBOARD    │ ↳ defined in plugins/alpha.lua, shows on bare `nvim`   │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
+-- │ p            │ Open Project (nvim-only, cd's into it)                 │
+-- │ d            │ Dev Setup (switches to that project's own tmux session)│
+-- │ f            │ Find File                                              │
+-- │ q            │ Quit                                                   │
+-- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ SPLIT NAV    │ ↳ smart-splits.nvim, works across nvim & tmux panes    │
 -- ├──────────────┼────────────────────────────────────────────────────────┤
 -- │ <C-h/j/k/l>  │ Move to split/pane in that direction                   │

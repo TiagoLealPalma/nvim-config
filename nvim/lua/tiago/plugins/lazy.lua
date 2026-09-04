@@ -38,6 +38,23 @@ require("lazy").setup({
   },
 
   {
+    "goolord/alpha-nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("tiago.plugins.alpha")
+    end,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("tiago.plugins.indent-blankline")
+    end,
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
