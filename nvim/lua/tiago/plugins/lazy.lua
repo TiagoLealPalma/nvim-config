@@ -141,6 +141,17 @@ require("lazy").setup({
     },
   },
   {
+    -- mason-lspconfig's ensure_installed only covers LSP servers; prettier
+    -- is a standalone formatter conform.nvim shells out to, so it needs
+    -- this separate installer to get the same "auto-provision on a fresh
+    -- machine" treatment instead of a manual :MasonInstall prettier.
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      ensure_installed = { "prettier" },
+    },
+  },
+  {
     "stevearc/conform.nvim",
     event = "BufWritePre",
     config = function()
