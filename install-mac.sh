@@ -11,14 +11,16 @@ fi
 brew install neovim git zig fd ripgrep tmux fzf lazygit
 brew install --cask font-fira-code-nerd-font
 
-mkdir -p "$HOME/.config" "$HOME/.config/tmux" "$HOME/.local/bin"
+mkdir -p "$HOME/.config" "$HOME/.config/tmux" "$HOME/.config/lazygit" "$HOME/.local/bin"
 
 ln -sfn "$script_dir/nvim" "$HOME/.config/nvim"
 ln -sf "$script_dir/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+ln -sf "$script_dir/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
 ln -sf "$script_dir/bin/dev" "$HOME/.local/bin/dev"
 
 echo "Linked nvim config -> ~/.config/nvim"
 echo "Linked tmux config -> ~/.config/tmux/tmux.conf"
+echo "Linked lazygit config -> ~/.config/lazygit/config.yml"
 echo "Linked dev launcher -> ~/.local/bin/dev (make sure ~/.local/bin is in your PATH)"
 
 tpm_dir="$HOME/.tmux/plugins/tpm"

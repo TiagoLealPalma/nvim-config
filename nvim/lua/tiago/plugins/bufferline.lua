@@ -1,4 +1,6 @@
--- Buffer tab bar with thin separators.
+-- Buffer tab bar, styled to match tmux/tmux.conf's window list: flat
+-- "N:name" text, no icons, active buffer a solid accent block with bold
+-- dark text (same as tmux's active-window badge), everything else plain.
 -- Keymaps: <S-h>/<S-l> cycle, <leader>1-9 jump by index, <leader>x close.
 -- <leader>fb (Telescope buffers) is patched in plugins/telescope.lua to jump
 -- to an existing bufferline tab instead of opening a duplicate.
@@ -8,21 +10,25 @@
 -- up front, not something reactive to a ColorScheme event, so this is only
 -- accurate while matte-black is the active colorscheme.
 local mb_bg = "#121212"
-local mb_bg_alt = "#333333"
 local mb_fg = "#bebebe"
 local mb_dim = "#8a8a8d"
 local mb_accent = "#e68e0d"
--- The tabline needs its own background, distinct from the editor bg —
--- otherwise unselected tabs (which sat on plain mb_bg) made the whole strip
--- look like an empty black gap instead of a bar with tabs in it.
-local mb_strip = "#1c1c1c"
+local mb_red = "#D35F5F"
+local mb_gold = "#D9B361"
 
 require("bufferline").setup({
   options = {
     mode = "buffers",
-    separator_style = "thin",
+    -- "N:name" prefix, matching tmux's window-status-format exactly
+    -- ("#I:#W") rather than bufferline's own "N. name" ordinal style.
+    numbers = function(opts)
+      return string.format("%d:", opts.ordinal)
+    end,
+    show_buffer_icons = false,
     show_buffer_close_icons = false,
     show_close_icon = false,
+    separator_style = { " ", " " }, -- plain gap, same as tmux's window-status-separator
+    indicator = { style = "none" }, -- the selected buffer's solid fill is the indicator
     -- Only show once there's an actual choice to make between tabs — with
     -- one buffer (or on the dashboard, which has none) it was just a bare
     -- dark strip with nothing useful in it.
@@ -37,33 +43,57 @@ require("bufferline").setup({
     },
   },
   highlights = {
-    fill = { bg = mb_strip },
-    background = { fg = mb_dim, bg = mb_strip },
-    buffer_visible = { fg = mb_fg, bg = mb_strip },
-    buffer_selected = { fg = mb_fg, bg = mb_bg_alt, bold = true },
-    numbers = { fg = mb_dim, bg = mb_strip },
-    numbers_selected = { fg = mb_accent, bg = mb_bg_alt, bold = true },
-    modified = { fg = mb_accent, bg = mb_strip },
-    modified_visible = { fg = mb_accent, bg = mb_strip },
-    modified_selected = { fg = mb_accent, bg = mb_bg_alt },
-    separator = { fg = mb_bg, bg = mb_strip },
-    separator_visible = { fg = mb_bg, bg = mb_strip },
-    separator_selected = { fg = mb_bg, bg = mb_bg_alt },
-    -- The colored bar marking the active buffer — the one deliberate spot
-    -- of accent color, so it reads as "this tab is selected" at a glance.
-    indicator_selected = { fg = mb_accent, bg = mb_bg_alt },
-    indicator_visible = { fg = mb_bg_alt, bg = mb_strip },
-    pick = { fg = mb_accent, bg = mb_strip, bold = true },
-    pick_visible = { fg = mb_accent, bg = mb_strip, bold = true },
-    pick_selected = { fg = mb_accent, bg = mb_bg_alt, bold = true },
-    duplicate = { fg = mb_dim, bg = mb_strip, italic = true },
-    duplicate_visible = { fg = mb_dim, bg = mb_strip, italic = true },
-    duplicate_selected = { fg = mb_fg, bg = mb_bg_alt, italic = true },
-    close_button = { fg = mb_dim, bg = mb_strip },
-    close_button_visible = { fg = mb_dim, bg = mb_strip },
-    close_button_selected = { fg = mb_fg, bg = mb_bg_alt },
-    trunc_marker = { fg = mb_dim, bg = mb_strip },
-    offset_separator = { fg = mb_bg_alt, bg = mb_strip },
+    fill = { bg = mb_bg },
+    background = { fg = mb_dim, bg = mb_bg },
+    buffer_visible = { fg = mb_fg, bg = mb_bg },
+    -- Solid accent block with dark bold text — exactly tmux's active-window
+    -- badge (`window-status-current-style "fg=$mb_bg,bg=$mb_accent,bold"`).
+    buffer_selected = { fg = mb_bg, bg = mb_accent, bold = true },
+    numbers = { fg = mb_dim, bg = mb_bg },
+    numbers_selected = { fg = mb_bg, bg = mb_accent, bold = true },
+    modified = { fg = mb_accent, bg = mb_bg },
+    modified_visible = { fg = mb_accent, bg = mb_bg },
+    modified_selected = { fg = mb_bg, bg = mb_accent },
+    separator = { fg = mb_bg, bg = mb_bg },
+    separator_visible = { fg = mb_bg, bg = mb_bg },
+    separator_selected = { fg = mb_bg, bg = mb_bg },
+    pick = { fg = mb_accent, bg = mb_bg, bold = true },
+    pick_visible = { fg = mb_accent, bg = mb_bg, bold = true },
+    pick_selected = { fg = mb_bg, bg = mb_accent, bold = true },
+    duplicate = { fg = mb_dim, bg = mb_bg, italic = true },
+    duplicate_visible = { fg = mb_dim, bg = mb_bg, italic = true },
+    duplicate_selected = { fg = mb_bg, bg = mb_accent, italic = true },
+    close_button = { fg = mb_dim, bg = mb_bg },
+    close_button_visible = { fg = mb_dim, bg = mb_bg },
+    close_button_selected = { fg = mb_bg, bg = mb_accent },
+    -- Left unset, these auto-derive a background a shade off the rest of
+    -- the bar — pin them to the same plain background as everything else.
+    error = { fg = mb_red, bg = mb_bg },
+    error_visible = { fg = mb_red, bg = mb_bg },
+    error_selected = { fg = mb_bg, bg = mb_accent, bold = true },
+    error_diagnostic = { fg = mb_red, bg = mb_bg },
+    error_diagnostic_visible = { fg = mb_red, bg = mb_bg },
+    error_diagnostic_selected = { fg = mb_bg, bg = mb_accent, bold = true },
+    warning = { fg = mb_gold, bg = mb_bg },
+    warning_visible = { fg = mb_gold, bg = mb_bg },
+    warning_selected = { fg = mb_bg, bg = mb_accent, bold = true },
+    warning_diagnostic = { fg = mb_gold, bg = mb_bg },
+    warning_diagnostic_visible = { fg = mb_gold, bg = mb_bg },
+    warning_diagnostic_selected = { fg = mb_bg, bg = mb_accent, bold = true },
+    info = { fg = mb_dim, bg = mb_bg },
+    info_visible = { fg = mb_dim, bg = mb_bg },
+    info_selected = { fg = mb_bg, bg = mb_accent },
+    info_diagnostic = { fg = mb_dim, bg = mb_bg },
+    info_diagnostic_visible = { fg = mb_dim, bg = mb_bg },
+    info_diagnostic_selected = { fg = mb_bg, bg = mb_accent },
+    hint = { fg = mb_dim, bg = mb_bg },
+    hint_visible = { fg = mb_dim, bg = mb_bg },
+    hint_selected = { fg = mb_bg, bg = mb_accent },
+    hint_diagnostic = { fg = mb_dim, bg = mb_bg },
+    hint_diagnostic_visible = { fg = mb_dim, bg = mb_bg },
+    hint_diagnostic_selected = { fg = mb_bg, bg = mb_accent },
+    trunc_marker = { fg = mb_dim, bg = mb_bg },
+    offset_separator = { fg = mb_dim, bg = mb_bg },
   },
 })
 

@@ -1,0 +1,32 @@
+# Matte Black theme (matches colors/matte-black.lua and tmux/tmux.conf),
+# hardcoded as real hex for the same reason those are: lazygit's theme
+# colors aren't reactive to the terminal/OS theme, so this only looks right
+# while matte-black is the active theme.
+gui:
+  theme:
+    activeBorderColor:
+      - "#e68e0d"
+      - bold
+    inactiveBorderColor:
+      - "#333333"
+    searchingActiveBorderColor:
+      - "#e68e0d"
+      - bold
+    optionsTextColor:
+      - "#e68e0d"
+    selectedLineBgColor:
+      - "#333333"
+    selectedRangeBgColor:
+      - "#333333"
+    cherryPickedCommitFgColor:
+      - "#121212"
+    cherryPickedCommitBgColor:
+      - "#D9B361"
+    markedBaseCommitFgColor:
+      - "#121212"
+    markedBaseCommitBgColor:
+      - "#D9B361"
+    unstagedChangesColor:
+      - "#D35F5F"
+    defaultFgColor:
+      - "#bebebe"
