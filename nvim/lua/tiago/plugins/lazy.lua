@@ -72,6 +72,12 @@ require("lazy").setup({
 
   {
     "nvim-treesitter/nvim-treesitter",
+    -- The "main" branch (this repo's default) was rewritten from scratch and
+    -- requires Neovim 0.12+ nightly — it dropped the nvim-treesitter.configs
+    -- module our config.lua below expects, causing a "nvim-treesitter not
+    -- available" notice on every startup. "master" is the old branch with
+    -- the stable, pre-rewrite API that still works on stable Neovim.
+    branch = "master",
     build = ":TSUpdate",
     config = function()
       require("tiago.plugins.treesitter")
