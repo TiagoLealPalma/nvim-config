@@ -74,7 +74,12 @@ if [ -f /etc/pacman.conf ]; then
 
 elif command -v apt >/dev/null 2>&1; then
   sudo apt update
-  sudo apt install -y neovim git fd-find ripgrep snapd tmux unzip fzf
+  # build-essential (gcc) matters beyond just "a compiler is nice to have":
+  # nvim-treesitter's compiler search order is cc/gcc/clang/cl/zig, and
+  # without gcc it falls back to zig — whose first `zig cc` invocation is
+  # notoriously slow (can look like it's hung for many minutes), especially
+  # under WSL's I/O and snap's confinement (zig ships via snap below).
+  sudo apt install -y neovim git build-essential fd-find ripgrep snapd tmux unzip fzf
   # fd is installed as fdfind on Debian/Ubuntu — make an alias
   if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
     mkdir -p "$HOME/.local/bin"
@@ -87,7 +92,7 @@ elif command -v apt >/dev/null 2>&1; then
   install_lazygit_binary
 
 elif command -v dnf >/dev/null 2>&1; then
-  sudo dnf install -y neovim git zig fd-find ripgrep tmux unzip fzf
+  sudo dnf install -y neovim git gcc zig fd-find ripgrep tmux unzip fzf
   install_font
   install_lazygit_binary
 
