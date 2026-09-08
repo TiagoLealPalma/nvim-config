@@ -85,6 +85,15 @@ require("lazy").setup({
   },
 
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = "markdown", -- also covers markdown injected into other filetypes' code blocks
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("tiago.plugins.render-markdown")
+    end,
+  },
+
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()

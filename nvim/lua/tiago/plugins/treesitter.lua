@@ -16,6 +16,11 @@ ts.setup({
     "css",
     "json",
     "lua",
+    -- markdown + markdown_inline required by render-markdown.nvim; yaml is
+    -- optional there but used for frontmatter rendering.
+    "markdown",
+    "markdown_inline",
+    "yaml",
   },
   highlight = { enable = true },
   indent = { enable = true },
